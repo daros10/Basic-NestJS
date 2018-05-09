@@ -1,6 +1,9 @@
-import { Module } from '@nestjs/common';
+import {MiddlewaresConsumer, Module, NestModule} from '@nestjs/common';
 import { AppController } from './app.controller';
 import {UsuarioControler} from "./UsuarioControler";
+import {ParametrosController} from "./parametros.controller";
+import {LogMiddleware} from "./log.middleware";
+
 
 @Module({
   imports: [
@@ -8,8 +11,14 @@ import {UsuarioControler} from "./UsuarioControler";
   ],
   controllers: [ //controlador
       AppController,
-      UsuarioControler
+      UsuarioControler,
+      ParametrosController
   ],
   components: [],
 })
-export class AppModule {}
+export class AppModule implements NestModule{
+    nombreAplicacion = 'EPN';
+    configure(consumer: MiddlewaresConsumer): void{
+        consumer.apply(LogMiddleware).with(this.nombreAplicacion, 1998).forRoutes(UsuarioControler,AppController,ParametrosController);
+    }
+}

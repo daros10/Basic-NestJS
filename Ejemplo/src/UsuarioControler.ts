@@ -12,14 +12,17 @@ export class UsuarioControler{
 
     @Get('mostrar')
     @HttpCode(202)
-    mostrarUsuario(//@Req() request, @Res() response//
-        //
+    mostrarUsuario(//
+        @Req() request,
+        @Res() response
         ){
-        return this.usuario;
+        return response.send(this.usuarios);
     }
 
     @Get('mostrarExpress')
-    mostrarUsuarioExpress(@Req() request, @Res() response){
+    mostrarUsuarioExpress(
+        @Req() request,
+        @Res() response){
         return response.status(200).send(this.usuarios);
     }
 
