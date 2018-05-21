@@ -3,17 +3,22 @@ import { AppController } from './app.controller';
 import {UsuarioControler} from "./UsuarioControler";
 import {ParametrosController} from "./parametros.controller";
 import {LogMiddleware} from "./log.middleware";
+import {UsuarioService} from "./usuario.service";
 
 
 @Module({
   imports: [
       //otros modulos
   ],
+    providers:[
+        UsuarioService
+    ],
   controllers: [ //controlador
       AppController,
       UsuarioControler,
       ParametrosController
   ],
+
   components: [],
 })
 export class AppModule implements NestModule{
